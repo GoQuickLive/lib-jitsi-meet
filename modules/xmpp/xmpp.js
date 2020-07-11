@@ -164,7 +164,7 @@ export default class XMPP extends Listenable {
         // this.caps.addFeature('urn:ietf:rfc:5576'); // a=ssrc
 
         // Enable Lipsync ?
-        if (browser.isChrome() && this.options.enableLipSync === true) {
+        if (browser.isChromiumBased() && this.options.enableLipSync === true) {
             logger.info('Lip-sync enabled !');
             this.caps.addFeature('http://jitsi.org/meet/lipsync');
         }
@@ -173,7 +173,7 @@ export default class XMPP extends Listenable {
             this.caps.addFeature('urn:xmpp:rayo:client:1');
         }
 
-        if (browser.supportsInsertableStreams()) {
+        if (browser.supportsInsertableStreams() && !(this.options.testing && this.options.testing.disableE2EE)) {
             this.caps.addFeature('https://jitsi.org/meet/e2ee');
         }
     }
